@@ -1,0 +1,30 @@
+version: "3.3"
+services:
+  user-service:
+    build: "./user-service"
+    # depends_on: -user-service-db
+    ports:
+      - "9200:9200"
+    volumes:
+      - ./user-service:/app/src
+
+  # user-service-db:
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: rootpassword
+  #   image: mongo:latest
+  #   ports:
+  #     - 27017:27017
+  patch-service:
+    build: "./patch-service"
+    ports:
+      - "9300:9300"
+    volumes:
+      - ./patch-service:/app/src
+
+  thumnail-service:
+    build: "./thumnail-service"
+    ports:
+      - "9100:9100"
+    volumes:
+      - ./thumnail-service:/app/src
